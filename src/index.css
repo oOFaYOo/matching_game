@@ -7,5 +7,22 @@ body, #root {
   position: absolute;
   height: 100%;
   width: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.MuiSwitch-track {
+  background: #7f7f7f !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border: thick double !important;
+  border-radius: 30px !important;
+}
+
+.MuiSelect-icon {
+  color: inherit !important;
 }
 
