@@ -13,7 +13,6 @@ const Menu = () => {
 
     const handleChangeTopic = (event: SelectChangeEvent) => {
         dispatch(setTopic(event.target.value));
-
     };
     const handleChangeAmount = (event: SelectChangeEvent) => {
         dispatch(setAmount(event.target.value));
@@ -23,7 +22,8 @@ const Menu = () => {
     const topics = ['Animals', 'Food', 'Fruits and vegetables'];
 
     return (
-        <div className={`${theme === 'dark' ? 'bg-neutral-900' : 'bg-neutral-100'} flex flex-col items-center justify-center gap-12 h-full w-full`}>
+        <div className={`${theme === 'dark' ? 'bg-neutral-900' : 'bg-neutral-100'} 
+        flex flex-col items-center justify-center gap-12 h-full w-full`}>
 
                     <ThemeSwitcher />
                     <FormControl>
@@ -51,7 +51,7 @@ const Menu = () => {
                         >
                             {
                                 topics.map((item, index) =>
-                                    <MenuItem key={index} value={index+1}>{item}</MenuItem>)
+                                    <MenuItem key={index} value={item.toLowerCase().replaceAll(' ', '_')}>{item}</MenuItem>)
                             }
                         </Select>
                     </FormControl>
@@ -84,7 +84,12 @@ const Menu = () => {
                             }
                         </Select>
                     </FormControl>
-                    <ButtonLink link={'/game'} title={'Start'} />
+                    <ButtonLink link={'/game'} title={'Start'} clickCallback={()=>{
+                        dispatch(setTopic(topic ? topic : 'animals'));
+                        dispatch(setAmount(amount ? amount : '8'));
+                        localStorage.topic = topic ? topic : 'animals';
+                        localStorage.amount = amount ? amount : '8';
+                    }} />
         </div>
     )
 }

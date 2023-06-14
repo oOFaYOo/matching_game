@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {IMatchingGameState} from "../types";
+import {ICard, IMatchingGameState} from "../types";
 
 export const initialState: IMatchingGameState = {
     theme: localStorage.theme ? localStorage.theme : 'light',
-    topic: '',
-    amount: '',
+    topic: localStorage.topic ? localStorage.topic : '',
+    amount: localStorage.amount ? localStorage.amount : '',
 };
 
 export const MatchingGameStoreSlice = createSlice({
