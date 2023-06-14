@@ -13,14 +13,14 @@ const ThemeSwitcher = () => {
 
     return (
         <div className={'flex flex-row items-center'}>
-            <img src={sun} className={`${theme === 'dark' ? 'grayscale' : ''} w-24 h-24`}/>
+            <img src={sun} className={`${theme === 'dark' ? 'grayscale' : ''} w-20 h-20`}/>
             <Switch data-testid={'switch'} id={'theme-switcher'} color={'default'} checked={theme !== 'light'}
                     onChange={(e) => {
                         const theme = e.currentTarget.checked ? 'dark' : 'light';
                         localStorage.setItem('theme', theme)
                         dispatch(setTheme(theme));
                     }}/>
-            <img src={moon} className={`${theme === 'dark' ? '' : 'grayscale'} w-24 h-24`}/>
+            <img src={moon} className={`${theme === 'dark' ? '' : 'grayscale'} w-20 h-20`}/>
         </div>
     )
 }

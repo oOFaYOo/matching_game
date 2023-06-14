@@ -37,14 +37,40 @@ function getCards(amount:number, topic:string){
     return cards;
 }
 
+function splitArray(array:ICard[]) {
+    let arr = [];
+    let length = array.length;
+    let divider = length >= 30 || length === 18 ? 6 : 4;
+    let ost = length % divider;
+    let last = 0;
+    for (let i = 0; i < length-ost; i++){
+        if((i+1)%divider === 0){
+            arr.push(array.slice(last, i+1));
+            last = i+1;
+        }
+    }
+    if(ost){
+        arr.push(array.slice(array.length-ost));
+    }
+    return arr;
+}
+
 const TileContainer = () => {
     const {theme, topic, amount} = useSelector((state: RootState) => state.MatchingGameStore);
 
+    let cards = splitArray(getCards(+amount, topic));
+
     return (
-        <div className={'relative mt-4 w-[80%] h-[80%] flex flex-wrap justify-center items-center gap-2'}>
+        <div className={`${cards.length > 5 ? 'flex-row' : 'flex-col'} 
+        relative grow flex justify-center items-center`}>
             {
-                getCards(+amount, topic).map((item, index)=>{
-                    return <Tile image={item.image} key={index} />
+                cards.map((item, index)=>{
+                    return (<div key={index} className={`${cards.length > 5 ? 'flex-col' : 'flex-row'} 
+                    relative w-full flex justify-center items-center`}>
+                        {item.map((item, index)=>{
+                            return <Tile image={item.image} key={index} />
+                        })}
+                    </div> )
                 })
             }
         </div>
