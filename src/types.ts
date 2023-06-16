@@ -13,6 +13,10 @@ export interface ICard {
 
 export interface ITile {
     image: string;
+    title: string;
+    open: boolean;
+    index: number;
+    clickHandler: (index:number, title:string) => void;
 }
 
 export interface IButtonLink {

@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
 import Tile from "../Tile";
@@ -34,6 +34,7 @@ function getCards(amount:number, topic:string){
     for(let num of nums){
         cards.push(topicsPack[topic][num]);
     }
+
     return cards;
 }
 
@@ -55,24 +56,77 @@ function splitArray(array:ICard[]) {
     return arr;
 }
 
-const TileContainer = () => {
+const TileContainer = ({setWin}:{setWin: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const {theme, topic, amount} = useSelector((state: RootState) => state.MatchingGameStore);
+    const cards = getCards(+amount, topic);
+    const splittedCards = splitArray(cards);
 
-    let cards = splitArray(getCards(+amount, topic));
+    const [pause, setPause] = useState(false);
+    const [activeCard, setActiveCard] = useState<{title: string, index: number} | null>(null);
+    const [cardsState, setCardsState] = useState<boolean[]>(cards.map((item, index) => {
+        return false;
+    }));
+
+    const clickHandler = (index:number, title:string) => {
+        if(!cardsState[index] && !pause){
+            if(activeCard){
+                setPause(true);
+                setTimeout(()=>{
+                    if(activeCard.index !== index){
+                        let arr = [...cardsState];
+                        arr[activeCard.index] = activeCard.title === title;
+                        arr[index] = activeCard.title === title;
+                        setCardsState(arr);
+                        setActiveCard(null);
+                    }
+                    setPause(false);
+                }, 1000);
+            } else {
+                setActiveCard({title:title, index:index});
+            }
+            let arr = [...cardsState];
+            arr[index] = true;
+            setCardsState(arr);
+        }
+    };
+
+    useEffect(()=>{
+        if(!cardsState.includes(false)){
+            setWin(true);
+        }
+    }, [cardsState]);
+
 
     return (
-        <div className={`${cards.length > 5 ? 'flex-row' : 'flex-col'} 
-        relative grow flex justify-center items-center`}>
-            {
-                cards.map((item, index)=>{
-                    return (<div key={index} className={`${cards.length > 5 ? 'flex-col' : 'flex-row'} 
-                    relative w-full flex justify-center items-center`}>
-                        {item.map((item, index)=>{
-                            return <Tile image={item.image} key={index} />
+        // <div className={`${splittedCards.length > 5 ? 'flex-row' : 'flex-col'}
+        // relative grow flex justify-center items-center`}>
+        //     {
+        //         splittedCards.map((item, index)=>{
+        //             return (<div key={index} className={`${splittedCards.length > 5 ? 'flex-col' : 'flex-row'}
+        //             relative w-full flex justify-center items-center`}>
+        //                 {item.map((item, index)=>{
+        //                     return <Tile
+        //                         image={item.image}
+        //                                 title={item.title}
+        //                                 clickHandler={clickHandler}
+        //                                 open={cardsState[index]}
+        //                                 key={index}
+        //                                 index={index}/>
+        //                 })}
+        //             </div> )
+        //         })
+        //     }
+        // </div>
+        <div className={`relative h-[70%] w-[70%] flex-wrap flex justify-center items-center`}>
+                        {cards.map((item, index)=>{
+                            return <Tile
+                                image={item.image}
+                                title={item.title}
+                                clickHandler={clickHandler}
+                                open={cardsState[index]}
+                                key={index}
+                                index={index}/>
                         })}
-                    </div> )
-                })
-            }
         </div>
     )
 };
