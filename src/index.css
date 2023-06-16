@@ -26,3 +26,10 @@ body, #root {
   color: inherit !important;
 }
 
+.card_open:active {
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+
