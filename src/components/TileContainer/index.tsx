@@ -38,28 +38,9 @@ function getCards(amount:number, topic:string){
     return cards;
 }
 
-function splitArray(array:ICard[]) {
-    let arr = [];
-    let length = array.length;
-    let divider = length >= 30 || length === 18 ? 6 : 4;
-    let ost = length % divider;
-    let last = 0;
-    for (let i = 0; i < length-ost; i++){
-        if((i+1)%divider === 0){
-            arr.push(array.slice(last, i+1));
-            last = i+1;
-        }
-    }
-    if(ost){
-        arr.push(array.slice(array.length-ost));
-    }
-    return arr;
-}
-
 const TileContainer = ({setWin}:{setWin: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const {theme, topic, amount} = useSelector((state: RootState) => state.MatchingGameStore);
     const cards = getCards(+amount, topic);
-    const splittedCards = splitArray(cards);
 
     const [pause, setPause] = useState(false);
     const [activeCard, setActiveCard] = useState<{title: string, index: number} | null>(null);
@@ -98,26 +79,7 @@ const TileContainer = ({setWin}:{setWin: React.Dispatch<React.SetStateAction<boo
 
 
     return (
-        // <div className={`${splittedCards.length > 5 ? 'flex-row' : 'flex-col'}
-        // relative grow flex justify-center items-center`}>
-        //     {
-        //         splittedCards.map((item, index)=>{
-        //             return (<div key={index} className={`${splittedCards.length > 5 ? 'flex-col' : 'flex-row'}
-        //             relative w-full flex justify-center items-center`}>
-        //                 {item.map((item, index)=>{
-        //                     return <Tile
-        //                         image={item.image}
-        //                                 title={item.title}
-        //                                 clickHandler={clickHandler}
-        //                                 open={cardsState[index]}
-        //                                 key={index}
-        //                                 index={index}/>
-        //                 })}
-        //             </div> )
-        //         })
-        //     }
-        // </div>
-        <div className={`relative h-[70%] w-[70%] flex-wrap flex justify-center items-center`}>
+        <div className={`${cards.length < 22 ? 'w-[450px]' : 'w-[650px]'} relative flex-wrap flex justify-center items-center`}>
                         {cards.map((item, index)=>{
                             return <Tile
                                 image={item.image}
