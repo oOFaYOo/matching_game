@@ -79,7 +79,10 @@ const TileContainer = ({setWin}:{setWin: React.Dispatch<React.SetStateAction<boo
 
 
     return (
-        <div className={`${cards.length < 22 ? 'w-[450px]' : 'w-[650px]'} relative flex-wrap flex justify-center items-center`}>
+        <div className={`${cards.length < 22 
+            ? 'big:w-[450px] mobile:w-[600px] tablet:w-[650px]' 
+            : 'big:w-[650px] tablet:w-[850px] mobile:w-[740px]'} 
+            relative flex-wrap flex justify-center items-center`}>
                         {cards.map((item, index)=>{
                             return <Tile
                                 image={item.image}

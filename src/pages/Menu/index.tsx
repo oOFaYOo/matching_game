@@ -37,14 +37,14 @@ const Menu = () => {
                             value={topic}
                             label="Topic"
                             onChange={handleChangeTopic}
-                            className={'w-56'}
+                            className={'big:w-56 mobile:w-[455px] tablet:w-[300px]'}
                             sx={
                                 theme === 'dark' ? {color: 'rgb(163 163 163)'} : {color: 'rgb(23 23 23)'}
                             }
                             MenuProps={{
                                 PaperProps: {
                                     style: {
-                                        borderRadius: '15px'
+                                        borderRadius: '15px',
                                     }
                                 }
                             }}
@@ -66,14 +66,14 @@ const Menu = () => {
                             value={amount}
                             label="Amount of cards"
                             onChange={handleChangeAmount}
-                            className={'w-56'}
+                            className={'big:w-56 mobile:w-[455px] tablet:w-[300px]'}
                             sx={theme === 'dark' ? {color: 'rgb(163 163 163)'} : {color: 'rgb(23 23 23)'}}
                             MenuProps={{
                                 PaperProps: {
                                     style: {
-                                        maxHeight: '150px',
-                                        minWidth: '100px',
-                                        borderRadius: '15px'
+                                        maxHeight: '250px',
+                                        minWidth: '150px',
+                                        borderRadius: '15px',
                                     }
                                 }
                             }}

@@ -16,7 +16,7 @@ const Game = () => {
     return (
         <div className={`${theme === 'dark' ? 'bg-neutral-900' : 'bg-neutral-100'} 
         flex flex-col items-center justify-start h-full w-full fixed overflow-auto`}>
-            <header className={'relative w-full flex flex-row justify-between items-center px-6 pt-1'}>
+            <header className={'relative w-full flex flex-row justify-between mobile:justify-evenly items-center px-6 pt-1'}>
                 <ButtonLink title={'Back to menu'} link={'/menu'} clickCallback={()=>{
                     dispatch(setTopic(''));
                     dispatch(setAmount(''));
