@@ -10,10 +10,10 @@ https://matching-game-one.vercel.app
 
 ## Demonstration:
 ### Laptop
-![demo]()
+![demo](https://github.com/oOFaYOo/matching_game/blob/main/public/demo.gif)
 
 ### Mobile
-![demo]()
+![demo](https://github.com/oOFaYOo/matching_game/blob/main/public/demo-mobile.gif)
 
 ## Test coverage:
 ![coverage](https://github.com/oOFaYOo/matching_game/blob/main/public/coverage.jpg)
