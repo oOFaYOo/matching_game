@@ -36,6 +36,7 @@ const Menu = () => {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
+                    data-testid="select1"
                     value={topic}
                     label="Topic"
                     onChange={handleChangeTopic}
@@ -68,6 +69,7 @@ const Menu = () => {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
+                    data-testid="select2"
                     value={amount}
                     label="Amount of cards"
                     onChange={handleChangeAmount}
