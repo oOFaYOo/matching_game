@@ -6,6 +6,9 @@ import {Provider} from "react-redux";
 import {store} from "../../store";
 import Game from "./index";
 
+jest.mock('./../../images/sun.png', ()=>'');
+jest.mock('./../../images/moon.png', ()=>'');
+
 it('Game test', () => {
 
     const Comp = () => {
