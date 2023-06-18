@@ -1,8 +1,11 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+
 import {Switch} from "@mui/material";
+
+import {useDispatch, useSelector} from "react-redux";
 import {setTheme} from "../../store/slice";
 import {RootState} from "../../store";
+
 import sun from './../../images/sun.png'
 import moon from './../../images/moon.png'
 
@@ -25,15 +28,12 @@ const ThemeSwitcher = () => {
             </div>
             <div className={'flex flex-row items-center big:hidden block'}>
                 {
-                    theme === 'dark'
-                    ? <img src={sun} className={'mobile:w-48 mobile:h-48 tablet:w-36 tablet:h-36'} onClick={()=>{
-                            localStorage.setItem('theme', 'light')
-                            dispatch(setTheme('light'));
-                        }}/>
-                    : <img src={moon} className={'mobile:w-48 mobile:h-48 tablet:w-36 tablet:h-36'} onClick={()=>{
-                            localStorage.setItem('theme', 'dark')
-                            dispatch(setTheme('dark'));
-                        }}/>
+                    <img src={theme === 'dark' ? sun : moon}
+                         className={'mobile:w-48 mobile:h-48 tablet:w-36 tablet:h-36'}
+                         onClick={() => {
+                             localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark');
+                             dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
+                         }}/>
                 }
             </div>
         </>
